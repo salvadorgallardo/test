@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wholesaler's University</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Logo.png" />
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: "#C5E26A",
+              brandHover: "#A8C75C",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        position: relative;
+      }
+
+
+      /* ── Lime scroll glow ── */
+      .page-glow {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .page-glow-orb {
+        position: absolute;
+        left: 50%;
+        top: var(--orb-y, 50%);
+        width: min(1400px, 130vw);
+        height: var(--orb-height, 900px);
+        transform: translate(-50%, -50%);
+        border-radius: 999px;
+        background: radial-gradient(ellipse at center,
+          rgba(197,226,106,.28) 0%,
+          rgba(197,226,106,.16) 25%,
+          rgba(197,226,106,.08) 45%,
+          rgba(197,226,106,.03) 65%,
+          rgba(197,226,106,0) 80%);
+        filter: blur(80px);
+        opacity: var(--orb-opacity, .45);
+        transition: opacity .4s linear, height .4s linear;
+        will-change: top, opacity, height;
+      }
+      [data-glow-section] {
+        position: relative;
+        z-index: 1;
+      }
+    img:not(.logo-img) {
+        filter: saturate(1.15) brightness(1.05);
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex flex-col text-slate-50"
+    style="
+      background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/4k.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    "
+  >
+    <!-- GLOW ORB -->
+    <div class="page-glow" aria-hidden="true">
+      <div class="page-glow-orb" id="pageGlowOrb"></div>
+    </div>
+
+    <!-- LOGO AT TOP -->
+    <div class="w-full flex justify-center pt-10 pb-6">
+      <img
+        src="images/logo-transparent.png"
+        alt="Wholesalers University"
+        class="h-28 md:h-32 w-auto drop-shadow-[0_0_30px_rgba(0,0,0,0.85)]"
+      />
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 flex flex-col gap-16 px-4 pb-10 md:pb-16">
+      <!-- HERO (NO FORM VISIBLE) -->
+      <div class="w-full max-w-5xl mx-auto">
+        <section class="text-center max-w-3xl mx-auto" data-glow-section>
+          <p
+            class="inline-flex items-center gap-2 rounded-full border border-brand/60 bg-black/70 px-3 py-1 text-xs font-medium text-brand mb-4 shadow-[0_0_18px_rgba(197,226,106,0.4)]"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-brand"></span>
+            Now accepting applications
+          </p>
+          <h2 class="text-3xl md:text-4xl font-semibold leading-tight mb-4">
+            Discover How Hundreds Are Supplementing Their Income With "<span class="text-brand">Real Estate Wholesaling</span>" – Flipping Contracts, Not Houses!
+            <span class="block text-base md:text-lg text-slate-200 mt-3">
+              The Simplest Way To Make Money Without A Bunch Of Capital....
+            </span>
+          </h2>
+          <p class="text-slate-200 mb-5 text-sm md:text-base mx-auto max-w-xl">
+            Wholesaler's University is a step-by-step program that shows you how
+            to find deals, talk to sellers, and close wholesale contracts
+            without needing your own cash or credit.
+          </p>
+          <ul class="space-y-2.5 text-sm md:text-base mb-6 max-w-xl mx-auto text-left">
+            <li class="flex items-center justify-center gap-2">
+              <span
+                class="mt-1 h-4 w-4 rounded-full bg-black/60 border border-brand/60 flex items-center justify-center text-[10px] text-brand flex-shrink-0"
+                >✓</span
+              >
+              <span>Live coaching and real scripts you can use the same day.</span>
+            </li>
+            <li class="flex items-center justify-center gap-2">
+              <span
+                class="mt-1 h-4 w-4 rounded-full bg-black/60 border border-brand/60 flex items-center justify-center text-[10px] text-brand flex-shrink-0"
+                >✓</span
+              >
+              <span>Virtual wholesaling systems so you can do deals in any market.</span>
+            </li>
+            <li class="flex items-center justify-center gap-2">
+              <span
+                class="mt-1 h-4 w-4 rounded-full bg-black/60 border border-brand/60 flex items-center justify-center text-[10px] text-brand flex-shrink-0"
+                >✓</span
+              >
+              <span>Supportive and Private community with like minded individuals.</span>
+            </li>
+          </ul>
+
+          <button
+            id="learn-more-btn"
+            class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-2.5 text-sm md:text-base font-semibold text-slate-950 shadow-[0_0_20px_rgba(197,226,106,0.7)] hover:bg-brandHover active:scale-[0.99] transition mx-auto"
+          >
+            Yes, I want to learn more!
+          </button>
+        </section>
+      </div>
+
+      <!-- WHY WHOLESALING SECTION -->
+      <section
+        class="w-full max-w-5xl mx-auto bg-black/75 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-[0_0_25px_rgba(0,0,0,0.7)] text-center" data-glow-section
+      >
+        <h2 class="text-2xl md:text-3xl font-semibold mb-2">
+          Why Is <span class="text-brand">Real Estate Wholesaling</span> The Best And Easiest Way To Generate Remote Income Today?
+        </h2>
+        <p class="text-xs md:text-sm text-slate-300 mb-6 max-w-2xl mx-auto">
+          These are the same reasons I chose wholesaling and why it’s perfect if you want to make money from a laptop, without taking on huge risk.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-5 md:gap-6">
+          <!-- Reason 1 -->
+          <article class="flex flex-col bg-black/70 border border-slate-800 rounded-xl p-4 gap-3 text-center">
+            <h3 class="text-sm font-semibold">
+              Reason #1: No Need to Own Property or Invest Capital...
+            </h3>
+            <p class="text-xs md:text-sm text-slate-300">
+              Wholesaling focuses on finding deeply discounted properties and assigning contracts to cash buyers meaning you don’t need to buy, fix, or own the property yourself. This makes it low-risk and low-cost to start, especially from anywhere with a phone and laptop.
+            </p>
+          </article>
+
+          <!-- Reason 2 -->
+          <article class="flex flex-col bg-black/70 border border-slate-800 rounded-xl p-4 gap-3 text-center">
+            <h3 class="text-sm font-semibold">
+              Reason #2: Entire Process Can Be Done Virtually...
+            </h3>
+            <p class="text-xs md:text-sm text-slate-300">
+              From lead generation to negotiating with sellers and connecting with buyers, every step can be done remotely using tools like Zoom, DocuSign, Google Maps, and skip tracing platforms. You can run your wholesaling business from your home, a coffee shop, or even while traveling.
+            </p>
+          </article>
+
+          <!-- Reason 3 -->
+          <article class="flex flex-col bg-black/70 border border-slate-800 rounded-xl p-4 gap-3 text-center">
+            <h3 class="text-sm font-semibold">
+              Reason #3: Fast Turnaround = Quick Paydays...
+            </h3>
+            <p class="text-xs md:text-sm text-slate-300">
+              Wholesalers typically get paid once a deal closes which can take as little as 7 to 30 days. That means you can see income quickly, especially if you consistently build a pipeline of deals, even while working another job or living in a different state.
+            </p>
+          </article>
+        </div>
+      </section>
+      
+<!-- ABOUT + THEN/NOW -->
+    <section class="mt-8 md:mt-10" data-glow-section>
+      <div class="mx-auto max-w-5xl border border-white/10 bg-black/60 rounded-2xl p-6 md:p-8 backdrop-blur-sm">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+          <!-- Story Text -->
+          <div class="flex-1">
+            <div class="text-xs font-semibold tracking-[0.2em] uppercase text-brand mb-2">About Me</div>
+            <h2 class="text-xl md:text-2xl font-semibold mb-4 leading-tight">
+              From Broke E-5 to <span class="text-brand">$70K a Month Wholesaling</span>
+            </h2>
+            <p class="text-sm md:text-base text-white/80 leading-relaxed mb-3">
+              I'm Salvador. A Navy veteran. I was working crazy hours as an E-5, away from home, and still couldn't get ahead financially. I knew there had to be a better way.
+            </p>
+            <p class="text-sm md:text-base text-white/80 leading-relaxed mb-3">
+              I tried everything. Dropshipping, crypto, stocks. Failed at all of them. Nothing stuck until I found real estate wholesaling.
+            </p>
+            <p class="text-sm md:text-base text-white/80 leading-relaxed mb-3">
+              No license. No experience. No down payments. Just finding deeply discounted properties and connecting them with cash buyers. My first deal hit and I realized this was something I could actually repeat.
+            </p>
+            <p class="text-sm md:text-base text-white/80 leading-relaxed mb-5">
+              I kept going, built the systems, built the pipeline. Now my wholesaling business does over <span class="text-brand font-semibold">$70,000 a month</span> and I left the military behind for good.
+            </p>
+            <div class="border-t border-white/10 pt-4">
+              <p class="text-sm text-white/60 leading-relaxed italic">
+                "I built Wholesalers University to show other vets and service members the exact process I used so you don't waste years guessing like I did."
+              </p>
+              <p class="text-sm text-brand font-semibold mt-2">Salvador, Founder</p>
+            </div>
+          </div>
+
+          <!-- Then / Now Photos stacked -->
+          <div class="w-full lg:w-64 flex flex-col gap-4 flex-shrink-0">
+            <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-black/40">
+              <img src="images/then.jpeg" alt="Then - Salvador in uniform" class="w-full h-96 object-cover object-center"/>
+              <div class="absolute top-2 left-2 bg-black/80 px-3 py-1 rounded-full text-xs font-semibold text-white border border-white/20 uppercase tracking-widest">Then</div>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden border border-brand/40 bg-black/40">
+              <img src="images/now.jpg" alt="Now - Salvador today" class="w-full h-96 object-cover object-center" style="image-rendering:high-quality;"/>
+              <div class="absolute top-2 left-2 bg-brand text-black px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest">Now</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>      <!-- WINS SECTION -->
+      <section
+        id="wins" data-glow-section
+        class="w-full max-w-5xl mx-auto bg-black/70 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-[0_0_25px_rgba(0,0,0,0.7)] text-center"
+      >
+        <div class="flex flex-col gap-2 mb-4">
+          <h3 class="text-xl md:text-2xl font-semibold">
+            Wins from Wholesaling Real Estate
+          </h3>
+          <p class="text-xs md:text-sm text-slate-300 max-w-xl mx-auto">
+            Real deposits and real results from applying the system.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"
+        >
+          <!-- WIN CARD 1 -->
+          <article
+            class="rounded-xl overflow-hidden bg-black/60 border border-slate-700 flex flex-col text-left"
+          >
+            <img
+              src="images/win1.jpg"
+              alt="Wire deposit 15,000"
+              class="w-full h-48 object-contain bg-black"
+            />
+            <div class="p-3 border-t border-slate-800">
+              <p class="text-xs text-slate-300">
+                $15,000 wire hit from a wholesale deal.
+              </p>
+            </div>
+          </article>
+
+          <!-- WIN CARD 2 -->
+          <article
+            class="rounded-xl overflow-hidden bg-black/60 border border-slate-700 flex flex-col text-left"
+          >
+            <img
+              src="images/win2.png"
+              alt="Wire deposit 43,200.95"
+              class="w-full h-48 object-contain bg-black"
+            />
+            <div class="p-3 border-t border-slate-800">
+              <p class="text-xs text-slate-300">
+                $43,200.95 wire showing what’s possible with bigger spreads.
+              </p>
+            </div>
+          </article>
+
+          <!-- WIN CARD 3 -->
+          <article
+            class="rounded-xl overflow-hidden bg-black/60 border border-slate-700 flex flex-col text-left"
+          >
+            <img
+              src="images/win3.png"
+              alt="Remote online deposit 32,800"
+              class="w-full h-48 object-contain bg-black"
+            />
+            <div class="p-3 border-t border-slate-800">
+              <p class="text-xs text-slate-300">
+                $32,800 remote deposit from a closed assignment.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+
+      <!-- STUDENT WINS SECTION -->
+      <section
+        data-glow-section
+        class="w-full max-w-5xl mx-auto bg-black/70 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-[0_0_25px_rgba(0,0,0,0.7)] text-center"
+      >
+        <div class="flex flex-col gap-2 mb-6">
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-brand">Student Results</p>
+          <h3 class="text-xl md:text-2xl font-semibold">
+            What Students Are Saying
+          </h3>
+          <p class="text-xs md:text-sm text-slate-300 max-w-xl mx-auto">
+            Real messages from real students applying the system.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw1.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw2.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw3.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw4.png" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw5.png" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw6.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw8.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw9.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+          <article class="rounded-xl overflow-hidden bg-black/60 border border-slate-700">
+            <img src="images/sw7.jpg" alt="Student win" class="w-full object-cover"/>
+          </article>
+        </div>
+      </section>
+      <!-- DISCLAIMER -->
+      <section class="w-full max-w-5xl mx-auto mt-4">
+        <div class="border-t border-white/10 pt-5 px-2">
+          <p class="text-[10px] md:text-xs leading-relaxed text-white/30 text-center max-w-3xl mx-auto">
+            <span class="font-semibold text-white/40">DISCLAIMER:</span> Individual results may vary. The figures stated above are our personal figures. Please understand our results are not typical. We are not implying you will duplicate them. The average person who buys any "how to" information gets little to no results. These references are for example purposes only. Your results will depend on many factors including your background, experience, and work ethic. All programs require risk as well as consistent effort and action.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-900 bg-black/70 mt-10">
+      <div
+        class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row gap-3 md:items-center md:justify-between text-[11px] text-slate-300"
+      >
+        <p>
+          ©
+          <span id="year"></span>
+          Wholesaler's University. All rights reserved.
+        </p>
+        <div class="flex gap-4">
+          <button class="underline underline-offset-2 hover:text-brand text-xs"
+  onclick="window.location.href='whu-privacy.html'">Privacy</button>
+          <button class="underline underline-offset-2 hover:text-brand text-xs"
+  onclick="window.location.href='whu-terms.html'">Terms</button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- FORM MODAL -->
+    <div
+      id="form-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 px-4"
+    >
+      <div
+        class="w-full max-w-md rounded-2xl border border-brand/60 bg-black/90 backdrop-blur-md shadow-[0_0_30px_rgba(197,226,106,0.35)] p-6 md:p-7 relative"
+      >
+        <button
+          type="button"
+          class="absolute right-3 top-3 text-slate-400 hover:text-slate-100 text-sm"
+          data-close-modal
+        >
+          ✕
+        </button>
+        <h3 class="text-lg font-semibold mb-1">
+          Book a call to work with me!
+        </h3>
+        <p class="text-xs text-slate-300 mb-5">
+          Fill out your information below to book a call with me or my team to see if we're a good fit to work together.
+        </p>
+
+        <form id="wu-form" class="space-y-4 text-sm">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium text-slate-200">
+                First name
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                required
+                class="rounded-lg border border-slate-700 bg-black/60 px-3 py-2 text-slate-50 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              />
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <label class="text-xs font-medium text-slate-200">
+                Last name
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                required
+                class="rounded-lg border border-slate-700 bg-black/60 px-3 py-2 text-slate-50 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-medium text-slate-200">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              class="rounded-lg border border-slate-700 bg-black/60 px-3 py-2 text-slate-50 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            />
+          </div>
+
+          <div class="flex flex-col gap-1.5">
+            <label class="text-xs font-medium text-slate-200">
+              Phone 
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              class="rounded-lg border border-slate-700 bg-black/60 px-3 py-2 text-slate-50 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+    <label class="text-xs font-medium text-slate-200">
+      Although you don’t need money to wholesale real estate, how much capital (cash or credit) do you currently have available to invest?
+    </label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-1.5">
+      <div class="flex flex-col gap-1.5">
+        <span class="text-[11px] text-slate-300">Type of funds</span>
+        <select
+          name="investmentType"
+          class="rounded-lg border border-slate-700 bg-black/60 px-3 py-2 text-slate-50 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+        >
+          <option value="">Select one</option>
+          <option value="cash">Cash</option>
+          <option value="credit">Credit</option>
+          <option value="both">Both</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <span class="text-[11px] text-slate-300">Approximate amount</span>
+        <input
+          type="text"
+          name="investmentAmount"
+          placeholder="10,000"
+          class="rounded-lg border border-slate-700 bg-black/60 px-3 py-2 text-slate-50 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+        />
+      </div>
+    </div>
+  </div>        
+
+          <button
+            type="submit"
+            class="mt-2 w-full rounded-xl bg-brand px-4 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_20px_rgba(197,226,106,0.6)] hover:bg-brandHover active:scale-[0.99] transition"
+          >
+            Submit!
+          </button>
+
+          <p class="text-[11px] text-slate-300 mt-2">
+            By submitting, you agree to receive information about
+            Wholesaler's University by email and/or text. You can unsubscribe
+            anytime.
+          </p>
+        </form>
+      </div>
+    </div>
+         <script>
+      // Set current year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Modal logic
+      const modal = document.getElementById("form-modal");
+      const openBtn = document.getElementById("learn-more-btn");
+      const closeButtons = document.querySelectorAll("[data-close-modal]");
+
+      if (openBtn && modal) {
+        openBtn.addEventListener("click", () => {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+        });
+      }
+
+      closeButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        });
+      });
+
+      // Close modal when clicking backdrop
+      if (modal) {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+          }
+        });
+      }
+
+      // 🔗 Zapier webhook URL
+      const ZAPIER_WEBHOOK_URL =
+        "https://hooks.zapier.com/hooks/catch/25546197/ukr39ma/";
+
+      const wuForm = document.getElementById("wu-form");
+
+      if (wuForm) {
+        wuForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const submitBtn = wuForm.querySelector("button[type='submit']");
+          const originalText = submitBtn ? submitBtn.textContent : "";
+
+          // Disable button + show loading state
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+          }
+
+          const formData = new FormData(wuForm);
+
+          try {
+            // ✅ Send to Zapier
+            await fetch(ZAPIER_WEBHOOK_URL, {
+              method: "POST",
+              body: formData,
+            });
+
+            // ✅ Show custom toast instead of alert()
+            const toast = document.getElementById("wu-toast");
+            if (toast) {
+              toast.classList.remove("opacity-0", "-translate-y-2");
+              toast.classList.add("pointer-events-auto");
+
+              // hide again after 3 seconds
+              setTimeout(() => {
+                toast.classList.add("opacity-0", "-translate-y-2");
+                setTimeout(() => {
+                  toast.classList.remove("pointer-events-auto");
+                }, 300);
+              }, 3000);
+            }
+
+            wuForm.reset();
+
+            // Close modal
+            if (typeof modal !== "undefined" && modal) {
+              modal.classList.add("hidden");
+              modal.classList.remove("flex");
+            }
+          } catch (err) {
+            console.error(err);
+            alert(
+              "Something went wrong submitting your application. Please try again."
+            );
+          } finally {
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent =
+                originalText || "Submit Application";
+            }
+          }
+        });
+      }
+    </script>
+    <!-- Success toast -->
+<div
+  id="wu-toast"
+  class="fixed inset-x-0 top-4 z-[60] flex justify-center opacity-0 pointer-events-none transition-all duration-300 -translate-y-2"
+>
+  <div
+    class="pointer-events-auto flex items-center gap-2 rounded-full px-4 py-2 text-xs shadow-lg"
+    style="
+      background: rgba(0, 0, 0, 0.92);
+      border: 1px solid #c5e26a;
+      box-shadow: 0 0 22px rgba(197, 226, 106, 0.7);
+      color: #f9fafb;
+    "
+  >
+    <span
+      style="
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:18px;
+        height:18px;
+        border-radius:999px;
+        border:1px solid #c5e26a;
+        background:rgba(197, 226, 106, 0.1);
+        font-size:10px;
+        color:#c5e26a;
+      "
+    >
+      ✓
+    </span>
+    <span>
+      Your application was submitted. Check your email to book your call.
+    </span>
+  </div>
+</div>
+  
+    <script>
+      // Scroll glow orb
+      const glowSections = Array.from(document.querySelectorAll('[data-glow-section]'));
+      const pageGlowOrb = document.getElementById('pageGlowOrb');
+
+      if (glowSections.length && pageGlowOrb) {
+        let ticking = false;
+
+        function updateGlow() {
+          const scrollTop = window.scrollY || window.pageYOffset;
+          const viewportCenter = window.innerHeight * 0.5;
+          let weightedCenter = 0, totalWeight = 0, strongestWeight = 0, weightedHeight = 0;
+
+          glowSections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const sectionCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(sectionCenter - viewportCenter);
+            const range = Math.max(window.innerHeight * 0.95, rect.height * 1.15);
+            let weight = Math.pow(Math.max(0, Math.min(1, 1 - distance / range)), 1.2);
+            const docCenter = scrollTop + sectionCenter;
+            weightedCenter += docCenter * weight;
+            weightedHeight += rect.height * weight;
+            totalWeight += weight;
+            strongestWeight = Math.max(strongestWeight, weight);
+          });
+
+          if (totalWeight > 0) {
+            const orbY = weightedCenter / totalWeight;
+            const orbHeight = Math.max(900, Math.min(1500, weightedHeight / totalWeight + 600));
+            const orbOpacity = Math.max(0.38, Math.min(0.62, 0.25 + strongestWeight * 0.28));
+            pageGlowOrb.style.setProperty('--orb-y', orbY.toFixed(1) + 'px');
+            pageGlowOrb.style.setProperty('--orb-height', orbHeight.toFixed(1) + 'px');
+            pageGlowOrb.style.setProperty('--orb-opacity', orbOpacity.toFixed(3));
+          }
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateGlow); ticking = true; } }, { passive: true });
+        window.addEventListener('resize', updateGlow);
+        updateGlow();
+      }
+    </script>
+</body>
+</html>
